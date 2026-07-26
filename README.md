@@ -279,7 +279,6 @@ This project is available under the MIT License. See `LICENSE` for details.
 
 ## Author
 
-- Name: _Your Name_
-- LinkedIn: _Your LinkedIn URL_
-- Email: _your.email@example.com_
-- GitHub: _https://github.com/your-github-profile_
+- Name: Tulsi Kumar Yadav
+- Email: tk6377054@gmail.com
+
