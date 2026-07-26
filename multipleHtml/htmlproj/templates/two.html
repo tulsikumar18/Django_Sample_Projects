@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>two</title>
+</head>
+<body>
+    <h1>
+        this is the 2nd page
+    </h1>
+
+    <hr>
+    <form action="result" method = "POST">     <!-- POST method is used to add data  IT AVOIDS DISPLAYING OF DATA IN THE URL BAR LIKE GET METHOD DOES--> 
+
+        {% csrf_token %}   <!-- CSRF stands for Cross Site Request Forgery , it is a security measure that prevents cross site request forgery -->
+        <br>
+        Enter the first value : <input type="text" name = 'num1'> <br> <br>
+        Enter the 2nd value :  <input type="text" name = 'num2'><br><br>
+
+       <!-- <input type="submit" name="add" value="ADD">
+       <input type="submit" name ="sub" value="SUB">
+       <input type="submit" name ="mul" value="MUL">
+       <input type="submit" name ="div" value="DIV">
+       <input type="submit" name ="mod" value="MOD"> -->
+
+
+
+       <!--  USE BUTTONS  -->
+
+       <button type = 'submit' name ='operation' value = 'add'>ADD</button>
+       <button type = 'submit'  name ='operation' value = 'sub'>SUB</button>
+       <button type = 'submit'  name ='operation' value = 'mul'>MUL</button>
+       <button type = 'submit'  name ='operation' value = 'div'>DIV</button>
+       <button type = 'submit'  name ='operation' value = 'mod'>MOD</button>
+
+
+        
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+
+    <style>
+        body{
+
+            border: 2px dashed blue;
+            width : 50%;
+            margin-left: 15%;
+            border-radius: 2rem;
+            margin-top: 15%;
+            background-color: antiquewhite;
+            
+        }
+        form{
+            padding: 1rem;
+           
+        }
+        .opr{
+            display: flex;
+            
+        }
+
+        
+       
+    </style>
+</head>
+<body>
+    
+   <div class="input">
+
+     <form action="result" , method="post">  <!-- method post helps in hidding the input data while running the page -->
+
+        {% csrf_token %}       <!-- This is used to verify the csrf token is included and data will not be leaked-->
+
+         <h1>Simple Calculator</h1>
+        <label for="">Enter the first number:</label>
+        <input type="text" name = 'num1'><br><br>
+
+        <label for="">Enter the second number</label>
+        <input type="text" name ='num2'><br><br>
+
+        
+        <input type="submit" value="ADD" name="operation" >     <!-- Value basically is used to display the text that you want to-->
+        <input type="submit" value="SUB" name="operation" >
+        <input type="submit" value="MUL" name="operation" >
+        <input type="submit" value="DIV" name="operation" >
+        <input type="submit" value="MOD" name="operation" >
+        <input type="submit" value="EXPO"name="operation" >
+
+
+    </form>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+h1{
+
+    color: red;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 2rem;
+    border: 4px dashed black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.main{
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    padding: 20px;
+    
+}
+
+

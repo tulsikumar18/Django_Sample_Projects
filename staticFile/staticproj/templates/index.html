@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--  link the css file using DTL -->
+
+    <link rel="stylesheet" href="{% static 'CSS/mystyle.css' %}">
+</head>
+<body>
+    
+    <h1>{{ message }}</h1>
+
+   {% comment %} 
+     <!-- To load the images 
+    
+     syntax : "{% mainfolder 'subfolder/imageName.jpeg' %}" 
+
+     this will give me error and html does not know the where the main folder so we have to use the {% load static %} in the beginning 
+
+    --> {% endcomment %}
+     <hr>
+
+    <div class = 'main'>
+
+        <div class="first">
+
+            <h1>This is first Krishan's Image</h1>
+             <img src="{% static 'images/krishna.jpeg' %}" alt="no img">
+        </div>
+         <div class="second">
+
+            <h1>This is second Krishan's Image</h1>
+             <img src="{% static 'images/krishna2.jpeg' %}" alt="no img">
+        </div>
+         <div class="third">
+
+            <h1>This is first Shankar's Image</h1>
+             <img src="{% static 'images/shankar.jpeg' %}" alt="no img">
+        </div>
+        
+        <div class="fourth">
+
+            <h1>This is second Shankar's Image</h1>
+             <img src="{% static 'images/shankar2.jpeg' %}" alt="no img">
+        </div>
+    </div>
+   
+</body>
+</html>

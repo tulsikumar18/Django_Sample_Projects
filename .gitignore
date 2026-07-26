@@ -1,0 +1,70 @@
+# Python
+*.py[cod]
+*.pyo
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+.eggs/
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+*.db
+*.sqlite3
+/db.sqlite3
+media/
+staticfiles/
+*.env
+.env
+local_settings.py
+
+# Pytest
+.cache/
+.pytest_cache/
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS
+.DS_Store
+
+# Distribution / packaging
+build/
+dist/
+downloads/
+.eggs/
+*.egg-info/
+.eggs/
+
+# SQLite and local databases
+*.sqlite3
+*.db
+
+# Django migrations (optional: keep if intentionally tracked)
+#**/migrations/*.pyc
+#**/migrations/__pycache__/
+
+# PyCharm
+.idea/
+
+# System files
+Thumbs.db
+desktop.ini

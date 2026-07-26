@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image display</title>
+    <!-- <link rel="stylesheet" href="../static/css/style.css"> -->
+
+    <!-- use DTL language to link that CSS file.. -->
+     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+    
+        <h1>Jai Shree Krishna</h1>
+        <img src="../static/images/image1.jpg" alt="" class = 'img'>
+
+        <hr>
+
+        <div class="back">
+
+                <p>Jai Shree Krishna</p>
+        </div>
+
+</body>
+</html>

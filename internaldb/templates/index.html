@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Student Details..</h1>
+
+    
+    {% for std in std_details %}
+
+    <h1>{{std.name}}</h1>
+    <p>{{std.usn}}</p>
+    <p>{{std.age}}</p>
+    <p>{{std.marks}}</p>
+    <p>{{std.email}}</p>
+    <p>{{std.grade}}</p>
+    <p>{{std.degree}}</p>
+
+    <hr>
+
+    {% endfor %}
+
+   <table border="1">
+    <tr>
+        <th>Id</th>
+        <th>USN</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Marks</th>
+        <th>Email</th>
+        <th>Degree</th>
+        <th>Grade</th>
+    </tr>
+    <tr  >
+        {% for std in std_details %}
+        <td>{{std.id}}</td>
+        <td>{{std.usn}}</td>
+        <td>{{std.name}}</td>
+        <td>{{std.age}}</td>
+        <td>{{std.marks}}</td>
+        <td>{{std.email}}</td>
+        <td>{{std.degree}}</td>
+        <td>{{std.grade}}</td>
+
+        {% endfor %}
+    </tr>
+
+</table>
+
+</body>
+</html>
