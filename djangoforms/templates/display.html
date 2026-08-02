@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+
+
+
+{% block content %}
+   <h1>Yes we have uploaded the image..</h1>
+
+    {% for info in data %}
+
+        <h1>{{info.name}}</h1>
+        <h2> {{info.address}} </h2>
+        <h3>{{info.age}}</h3>
+        
+        
+        {% if info.image %}
+            <img src="{{ info.image.url }}" alt="No Image">
+        
+        {% else %}
+                <p> No img to display ..</p>
+
+        {% endif %}
+
+    {% endfor %}
+    
+
+{% endblock %}
+
+
+    
