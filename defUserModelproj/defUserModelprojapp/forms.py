@@ -3,20 +3,39 @@ from defUserModelprojapp.models import UserDetails
 from django import forms
 
 from django.contrib.auth.models import User
-
+from django_recaptcha.fields import ReCaptchaField
 
 
 class UserForm(forms.ModelForm):
 
+    password = forms.CharField(widget=forms.PasswordInput) # this is used to display the password in the **** form..
+
     class Meta:
 
         model = User
+        # fields = '__all__'
         fields = ['username', 'email', 'password']
 
 
 class UserProfileForm(forms.ModelForm):
+    
+    class Meta:
+        model = UserDetails
+        fields = ['phone','age', 'house_no', 'address','city', 'userpic']
+    captcha = ReCaptchaField()
+
+
+
+class UserUpdateForm(forms.ModelForm):
 
     class Meta:
+        model = User
+        fields = ['username', 'email']
 
+
+# created to update the 2nd forms data..
+class UserProfileUpdateForm(forms.ModelForm):
+
+    class Meta:
         model = UserDetails
         fields = ['phone','age', 'house_no', 'address','city', 'userpic']

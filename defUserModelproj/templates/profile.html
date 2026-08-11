@@ -1,0 +1,31 @@
+{% load crispy_forms_tags %}
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <div class="container">
+        <div class="jumbotron">
+
+            <div class="col-md-6">
+                <h5> Email : {{ user.email }} </h5>
+                <h5> Age : {{user.userdetails.age }} </h5>
+                <h5> Phone : {{ user.userdetials.phone}} </h5>
+                <h5> House No : {{ user.userdetials.house_no}} </h5>
+               
+                <h5>City : {{ user.userdetials.city }} </h5>
+                <h5> Address : {{ user.userdetials.address }} </h5>
+                <a href="" class="btn btn-primary" href = "{% url 'update' %}"> Update Profile</a>
+                
+            </div>
+            <div class="col-md-6">
+                <h5>User Profile Pic..</h5>
+                {% if user.userdetails.userpic %}
+                    <img src="{{user.userdetails.userpic.url }}" alt="No Img">
+                {% else %}
+                    <p>No Img</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+    <div class="container">
+
+        <div class="jumbotron">
+
+            <div class="card card-body">
+               <h1 style="text-align: center;"> Login Here ...</h1>
+               <hr>
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+
+                    <label for="" >Username</label> <input type="text" name="username" placeholder="Enter username ">
+                    <br><br>
+                    <label for="">Password</label> <input type="password" name="password" placeholder="Enter password..">
+                    <br><br>
+                    <input type="submit" value="Login" class="btn btn-primary">
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

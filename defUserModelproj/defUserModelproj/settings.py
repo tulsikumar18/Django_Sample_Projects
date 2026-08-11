@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+
 from django.conf.global_settings import MEDIA_ROOT
 from django.conf.global_settings import STATICFILES_DIRS
 from pathlib import Path
@@ -41,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'defUserModelprojapp',
+    'crispy_forms',
+    'crispy_bootstrap5',
+    'django_recaptcha',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +141,25 @@ MEDIA_ROOT = [
 ]
 
 
+
+## configure the bootstrap5..
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+## configure the recaptcha... from django - recaptcha
+
+RECAPTCHA_PUBLIC_KEY = '6Lc_sHktAAAAANMjB1TlRMiifD2bxaLvtO9Y1LMS'
+RECAPTCHA_PRIVATE_KEY = '6Lc_sHktAAAAAKLHQLLZO3w9s9RI44oGlh1x2sHs'
+
+
+## Hashing techinque from django-hashing..
+
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
+]
