@@ -1,0 +1,109 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+    <div class="container">
+        <div class="jumbotron">
+
+            <br><br>
+            <div class="card card-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 style ="text-align: center;">Vendor Registration Form..</h1>
+                    </div>
+                </div>
+                <br><br>
+
+                <div class="row">
+    
+                        <form method ="POST" action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                           <div class="row">
+                                <div class="col-md-6">
+                                    {{form1.vendor_name | as_crispy_field}}
+                                </div>
+
+                                <div class="col-md-6">
+                                    {{form1.vendor_email| as_crispy_field}}
+                               </div>
+
+                           </div>
+
+                           <div class="row">
+                               <div class="col-md-6">
+                                    {{form1.password| as_crispy_field}}
+                               </div>
+
+                               <div class="col-md-6">
+                                   {{form1.restaurant_name | as_crispy_field}}
+                               </div>
+                           </div>
+
+                           <div class="row">
+                                <div class="col-md-6">
+                                    {{form1.phone_no | as_crispy_field}}
+                                </div>
+
+                                <div class="col-md-6">
+                                    {{form1.address1| as_crispy_field}}
+                               </div>
+
+                           </div>
+
+                           <div class="row">
+                                <div class="col-md-6">
+                                    {{form1.address2 | as_crispy_field}}
+                                </div>
+
+                                <div class="col-md-6">
+                                    {{form1.city| as_crispy_field}}
+                               </div>
+
+                           </div>
+
+                           <div class="row">
+                                <div class="col-md-6">
+                                    {{form1.state | as_crispy_field}}
+                                </div>
+
+                                <div class="col-md-6">
+                                    {{form1.zipcode| as_crispy_field}}
+                               </div>
+
+                           </div>
+
+                           <div class="row">
+                                <div class="col-md-6">
+                                    {{form1.gst_no | as_crispy_field}}
+                                </div>
+
+                                <div class="col-md-6">
+                                    {{form1.license_img| as_crispy_field}}
+                               </div>
+
+                           </div>
+
+                           <div class="row">
+                                <div class="col-md-6">
+                                    {{form1.restaurant_img | as_crispy_field}}
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    {{form1.captcha | as_crispy_field}}
+                                </div>
+
+                           </div>
+
+                            <input type="submit" value="Register" class="btn btn-primary">
+                        </form>
+                
+            </div>
+        </div>
+    </div>
+    
+
+{%endblock%}

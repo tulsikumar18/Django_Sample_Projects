@@ -1,5 +1,5 @@
 
-from defUserModelprojapp.models import UserDetails
+from defUserModelprojapp.models import UserDetails,VendorDetails
 from django import forms
 
 from django.contrib.auth.models import User
@@ -21,7 +21,17 @@ class UserProfileForm(forms.ModelForm):
     
     class Meta:
         model = UserDetails
-        fields = ['phone','age', 'house_no', 'address','city', 'userpic']
+        fields = [
+            'phone',
+            'age',
+            'house_no',
+            'street',
+            'address',
+            'city',
+            'state',
+            'zipcode',
+            'userpic'
+        ]
     captcha = ReCaptchaField()
 
 
@@ -39,3 +49,28 @@ class UserProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserDetails
         fields = ['phone','age', 'house_no', 'address','city', 'userpic']
+
+
+## vendorDetails Form..
+
+class VendorDetailsForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    
+    class Meta:
+        model = VendorDetails
+        fields = [
+            'vendor_name',
+            'vendor_email',
+            'password',
+            'restaurant_name',
+            'phone_no',
+            'address1',
+            'address2',
+            'city',
+            'state',
+            'zipcode',
+            'gst_no',
+            'license_img',
+            'restaurant_img',
+        ]
+    captcha = ReCaptchaField()

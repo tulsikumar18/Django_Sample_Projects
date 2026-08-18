@@ -1,0 +1,49 @@
+{% extends 'base.html'%}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+    <div class="jumbotron">
+
+        <div class="card card-body">
+            
+            <h1 style="text-align: center;"> Welcome to dashboard {{vendor.vendor_name}} </h1>
+
+           <div class="row">
+                <div class="col-md-6">
+                    <h3> Email : {{vendor.vendor_email}} </h3>
+                </div>
+
+                <div class="col-md-6">
+                    <h3> Restaurant Name : {{vendor.restaurant_name}}</h3>
+                </div>
+
+           </div>
+
+           <div class="row">
+                <div class="col-md-6">
+                    <h3> Phone : {{vendor.phone_no}} </h3>
+                </div>
+
+                <div class="col-md-6">
+                    <h3> Address1 : {{vendor.address1}}</h3>
+                </div>
+
+           </div>
+           <br><br>
+
+            <div style="text-align: center;">
+                <a href="{% url 'foodmenu' %}" class="btn btn-primary">Add Menu</a>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+{%endblock%}

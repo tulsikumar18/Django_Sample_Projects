@@ -1,13 +1,47 @@
+{% extends 'base.html'%}
 
-{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
 <div class="container">
-
     <div class="jumbotron">
-        <h1 style="text-align: center;">You Are Welcome</h1>
+
+        <div class="card card-body">
+            
+            <h1 style="text-align: center;"> Welcome to Home </h1>
+
+            {% for vendor in vendors %}
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2>{{ vendor.restaurant_name }}</h2>
+
+                            <p><em>{{ vendor.vendor_name }}</em></p>
+
+                            <p><em>{{vendor.city }}</em></p>
+                            <h6> <em>Address : </em>{{vendor.address1 }}</h6>
+                            
+                        </div>
+
+                        <div class="col-md-6">
+                            {% if vendor.restaurant_img %}
+                                <img style="border: 3px dashed rgb(50, 15, 204); border-radius : 50%; margin-bottom : 15px ; margin-left : 300px ;" src="{{ vendor.restaurant_img.url }}" width="200" alt="{{ vendor.restaurant_name }}">
+                            {% endif %}           
+
+                        </div>
+
+                    </div>
+
+            {% endfor %}
+
         </div>
+
+
+    </div>
 </div>
 
-{% endblock %}
+
+
+{%endblock%}

@@ -10,9 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
-
-from django.conf.global_settings import MEDIA_ROOT
-from django.conf.global_settings import STATICFILES_DIRS
 from pathlib import Path
 import os
 
@@ -45,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_recaptcha',
+    'menuapp',
 ]
 
 MIDDLEWARE = [
@@ -132,14 +130,12 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-## media configuration ..
 
-MEDIA_URL = 'media/'
 
-MEDIA_ROOT = [
-    os.path.join(BASE_DIR,'media')
-]
+# Media configuration
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 ## configure the bootstrap5..

@@ -1,3 +1,4 @@
+
 from django.urls import path
 from defUserModelprojapp import views
 
@@ -7,5 +8,8 @@ urlpatterns = [
     path('home', views.home, name = 'home'),
     path('logout', views.user_logout, name = 'logout'),
     path('profile', views.user_profile , name = 'profile'),
-    path('update', views.update,name = 'update')
+    path('update', views.update,name = 'update'),
+    path('vendor', views.vendor_reg, name = 'vendor'),
+    path('dashboard',views.dashboard,name='dashboard'),
+    path('foodmenu',views.foodmenu, name = 'foodmenu' )
 ]
