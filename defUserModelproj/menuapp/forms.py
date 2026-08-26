@@ -8,4 +8,9 @@ class MenuForms(forms.ModelForm):
     class Meta:
 
         model = FoodItems
-        fields = '__all__'
+        fields = [
+            'name',
+            'price',
+            'img',
+            'category',
+        ]

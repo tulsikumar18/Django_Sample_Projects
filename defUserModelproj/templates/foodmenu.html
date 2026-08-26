@@ -1,36 +1,77 @@
 {% extends 'base.html' %}
+
 {% load crispy_forms_tags %}
+
 {% block content %}
-    
-    <div class="container">
-        <div class="jumbotron">
-            <h1 style="text-align: center;"> Food Menu Registration</h1>
 
-            <div class="card card-body">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{form1.name | as_crispy_field}}
-                        </div>
+<div class="container py-5">
 
-                        <div class="col-md-6">
-                            {{form1.price | as_crispy_field}}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{form1.img | as_crispy_field}}
-                        </div>
+    <div class="card">
 
-                        <div class="col-md-6">
-                            {{form1.category | as_crispy_field}}
-                        </div>
-                    </div>
-                    <input type="submit" value="Add Menu" class="btn btn-primary">
-          </form>
+        <div class="card-body">
+
+            <h1 class="text-center fw-bold mb-4">
+                Food Menu Registration
+            </h1>
+
+
+            <!-- Logged in vendor -->
+
+            <div >
+
+                <strong>Restaurant:</strong>
+                {{ vendor.restaurant_name }}
+
+                <br>
+
+                <strong>Vendor:</strong>
+                {{ vendor.vendor_name }}
+
             </div>
+            <br>
+
+
+            <form method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        {{ form1.name|as_crispy_field }}
+                    </div>
+
+                    <div class="col-md-6">
+                        {{ form1.price|as_crispy_field }}
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        {{ form1.img|as_crispy_field }}
+                    </div>
+
+                    <div class="col-md-6">
+                        {{ form1.category|as_crispy_field }}
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="btn btn-primary mt-3">
+                    Add Menu
+                </button>
+
+            </form>
+
         </div>
+
     </div>
-    
-{%endblock%}
+
+</div>
+
+{% endblock %}

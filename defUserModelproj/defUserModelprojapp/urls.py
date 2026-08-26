@@ -11,5 +11,11 @@ urlpatterns = [
     path('update', views.update,name = 'update'),
     path('vendor', views.vendor_reg, name = 'vendor'),
     path('dashboard',views.dashboard,name='dashboard'),
-    path('foodmenu',views.foodmenu, name = 'foodmenu' )
+    path('foodmenu',views.foodmenu, name = 'foodmenu' ),
+
+    path('restaurant/<int:id>/',views.res_details,name='restaurant_details'),
+
+    path('add-to-cart/<int:id>/',views.add_to_cart,name='add_to_cart'),
+
+    path('cart/',views.cart,name='cart'),
 ]

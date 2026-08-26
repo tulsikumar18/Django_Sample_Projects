@@ -1,47 +1,128 @@
-{% extends 'base.html'%}
-
-{% load crispy_forms_tags %}
+{% extends 'base.html' %}
 
 {% block content %}
 
-<div class="container">
-    <div class="jumbotron">
+<div class="container py-5">
 
-        <div class="card card-body">
-            
-            <h1 style="text-align: center;"> Welcome to Home </h1>
+    <div class="text-center mb-5">
 
-            {% for vendor in vendors %}
+        <h1 class="fw-bold">
+            Welcome to Home
+        </h1>
+
+        <p class="text-muted">
+            Discover our approved restaurants
+        </p>
+
+    </div>
 
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h2>{{ vendor.restaurant_name }}</h2>
+    {% for vendor in vendors %}
 
-                            <p><em>{{ vendor.vendor_name }}</em></p>
+    <div class="card shadow-sm border-0 mb-4">
 
-                            <p><em>{{vendor.city }}</em></p>
-                            <h6> <em>Address : </em>{{vendor.address1 }}</h6>
-                            
-                        </div>
+        <div class="row g-0">
 
-                        <div class="col-md-6">
-                            {% if vendor.restaurant_img %}
-                                <img style="border: 3px dashed rgb(50, 15, 204); border-radius : 50%; margin-bottom : 15px ; margin-left : 300px ;" src="{{ vendor.restaurant_img.url }}" width="200" alt="{{ vendor.restaurant_name }}">
-                            {% endif %}           
+            <!-- Restaurant Image -->
+            <div class="col-md-5">
 
-                        </div>
+                {% if vendor.restaurant_img %}
+
+                    <a href="{% url 'restaurant_details' vendor.id %}">
+
+                        <img
+                            src="{{ vendor.restaurant_img.url }}"
+                            class="img-fluid rounded-start w-100"
+                            alt="{{ vendor.restaurant_name }}"
+                        >
+
+                    </a>
+
+                {% else %}
+
+                    <div class="bg-light text-center p-5">
+
+                        <p class="text-muted">
+                            No Image Available
+                        </p>
 
                     </div>
 
-            {% endfor %}
+                {% endif %}
+
+            </div>
+
+
+            <!-- Restaurant Details -->
+            <div class="col-md-7">
+
+                <div class="card-body p-4">
+
+                    <a
+                        href="{% url 'restaurant_details' vendor.id %}"
+                        class="text-decoration-none text-dark"
+                    >
+
+                        <h2 class="card-title fw-bold">
+                            {{ vendor.restaurant_name }}
+                        </h2>
+
+                    </a>
+
+
+                    <p class="text-muted">
+                        Owner:
+                        <strong>{{ vendor.vendor_name }}</strong>
+                    </p>
+
+
+                    <p>
+                        <strong>City:</strong>
+                        {{ vendor.city }}
+                    </p>
+
+
+                    <p>
+                        <strong>Address:</strong>
+                        {{ vendor.address1 }}
+
+                        {% if vendor.address2 %}
+                            , {{ vendor.address2 }}
+                        {% endif %}
+                    </p>
+
+
+                    <span class="badge bg-success mb-3">
+                        ✓ Admin Approved
+                    </span>
+
+
+                    <br>
+
+
+                    <a
+                        href="{% url 'restaurant_details' vendor.id %}"
+                        class="btn btn-primary"
+                    >
+                        View Restaurant
+                    </a>
+
+                </div>
+
+            </div>
 
         </div>
 
-
     </div>
+
+    {% empty %}
+
+        <div class="alert alert-info text-center">
+            No approved restaurants available.
+        </div>
+
+    {% endfor %}
+
 </div>
 
-
-
-{%endblock%}
+{% endblock %}

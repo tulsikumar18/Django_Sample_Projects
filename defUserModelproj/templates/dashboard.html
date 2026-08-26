@@ -40,6 +40,12 @@
 
         </div>
 
+        <hr>
+
+        {% for food in foodItems %}
+            <p>{{food.name}}</p>
+            <img src="{{food.img.url}}" alt="{{food.name}}">
+        {% endfor %}
 
     </div>
 </div>

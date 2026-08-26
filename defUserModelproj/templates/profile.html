@@ -1,35 +1,228 @@
-
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
 
 {% block content %}
-    
-    <div class="container">
-        <div class="jumbotron">
+
+<div class="container py-5">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            {% if is_vendor %}
+
+                <h2 class="text-center">
+                    {{ vendor.vendor_name }}'s Profile
+                </h2>
+
+            {% else %}
+
+                <h2 class="text-center">
+                    {{ user.username }}'s Profile
+                </h2>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="card-body">
+
             <div class="row">
+
+                <!-- Profile Information -->
                 <div class="col-md-6">
-                    <h2>{{user.username }}'s Profile</h2>
-                    <h5> Email : {{ user.email }} </h5>
-                    <h5> Age : {{user.userdetails.age }} </h5>
-                    <h5> Phone : {{ user.userdetails.phone}} </h5>
-                    <h5> House No : {{ user.userdetails.house_no}} </h5>
-                    <h5>City : {{ user.userdetails.city }} </h5>
-                    <h5> Address : {{ user.userdetails.address }} </h5>
-                    <a class="btn btn-primary" href = "{% url 'update' %}"> Update Profile</a>
-                    
-                </div>
-            
-                <div class="col-md-6">
-                    <h5>User Profile Pic..</h5>
-                    {% if user.userdetails.userpic %}
-                        <img style="width: 30vh; height : 30vh;  border : 2px red dashed; border-radius : 50% ;" src="{{user.userdetails.userpic.url }}" alt="No Img">
+
+                    {% if is_vendor %}
+
+                        <!-- VENDOR PROFILE -->
+
+                        <h4 class="mb-4">
+                            Vendor Information
+                        </h4>
+
+                        <p>
+                            <strong>Vendor Name:</strong>
+                            {{ vendor.vendor_name }}
+                        </p>
+
+                        <p>
+                            <strong>Email:</strong>
+                            {{ vendor.vendor_email }}
+                        </p>
+
+                        <p>
+                            <strong>Restaurant:</strong>
+                            {{ vendor.restaurant_name }}
+                        </p>
+
+                        <p>
+                            <strong>Phone:</strong>
+                            {{ vendor.phone_no }}
+                        </p>
+
+                        <p>
+                            <strong>City:</strong>
+                            {{ vendor.city }}
+                        </p>
+
+                        <p>
+                            <strong>Address:</strong>
+                            {{ vendor.address1 }}
+
+                            {% if vendor.address2 %}
+                                , {{ vendor.address2 }}
+                            {% endif %}
+                        </p>
+
+                        <p>
+                            <strong>State:</strong>
+                            {{ vendor.state }}
+                        </p>
+
+                        <p>
+                            <strong>Zipcode:</strong>
+                            {{ vendor.zipcode }}
+                        </p>
+
+                        <p>
+                            <strong>GST No:</strong>
+                            {{ vendor.gst_no }}
+                        </p>
+
+                        {% if vendor.is_approved %}
+
+                            <span class="badge bg-success">
+                                Admin Approved
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-warning text-dark">
+                                Waiting for Approval
+                            </span>
+
+                        {% endif %}
+
+
                     {% else %}
-                        <p>No Img</p>
+
+                        <!-- NORMAL USER PROFILE -->
+
+                        <h4 class="mb-4">
+                            User Information
+                        </h4>
+
+                        <p>
+                            <strong>Username:</strong>
+                            {{ user.username }}
+                        </p>
+
+                        <p>
+                            <strong>Email:</strong>
+                            {{ user.email }}
+                        </p>
+
+                        <p>
+                            <strong>Age:</strong>
+                            {{ userdetails.age }}
+                        </p>
+
+                        <p>
+                            <strong>Phone:</strong>
+                            {{ userdetails.phone }}
+                        </p>
+
+                        <p>
+                            <strong>House No:</strong>
+                            {{ userdetails.house_no }}
+                        </p>
+
+                        <p>
+                            <strong>City:</strong>
+                            {{ userdetails.city }}
+                        </p>
+
+                        <p>
+                            <strong>Address:</strong>
+                            {{ userdetails.address }}
+                        </p>
+
                     {% endif %}
+
+
+                    <div class="mt-4">
+
+                        <a
+                            href="{% url 'update' %}"
+                            class="btn btn-primary"
+                        >
+                            Update Profile
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Image -->
+                <div class="col-md-6 text-center">
+
+                    {% if is_vendor %}
+
+                        <h5 class="mb-3">
+                            Restaurant Image
+                        </h5>
+
+                        {% if vendor.restaurant_img %}
+
+                            <img
+                                src="{{ vendor.restaurant_img.url }}"
+                                class="img-fluid rounded shadow"
+                                style="width: 300px; height: 300px; object-fit: cover;"
+                                alt="{{ vendor.restaurant_name }}"
+                            >
+
+                        {% else %}
+
+                            <p class="text-muted">
+                                No Restaurant Image
+                            </p>
+
+                        {% endif %}
+
+                    {% else %}
+
+                        <h5 class="mb-3">
+                            User Profile Picture
+                        </h5>
+
+                        {% if userdetails.userpic %}
+
+                            <img
+                                src="{{ userdetails.userpic.url }}"
+                                class="rounded-circle shadow"
+                                style="width: 250px; height: 250px; object-fit: cover;"
+                                alt="Profile Picture"
+                            >
+
+                        {% else %}
+
+                            <p class="text-muted">
+                                No Profile Picture
+                            </p>
+
+                        {% endif %}
+
+                    {% endif %}
+
                 </div>
 
             </div>
+
         </div>
+
     </div>
+
+</div>
 
 {% endblock %}

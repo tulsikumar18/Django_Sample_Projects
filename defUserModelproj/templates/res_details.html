@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card shadow mb-5">
+
+        {% if vendor.restaurant_img %}
+
+            <img
+                src="{{ vendor.restaurant_img.url }}"
+                class="card-img-top"
+                style="height:300px; object-fit:cover;"
+            >
+
+        {% endif %}
+
+        <div class="card-body">
+
+            <h1>
+                {{ vendor.restaurant_name }}
+            </h1>
+
+            <p>
+                {{ vendor.address1 }}
+            </p>
+
+            <p>
+                {{ vendor.city }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <h2 class="mb-4">
+        Food Menu
+    </h2>
+
+
+    <div class="row">
+
+        {% for food in foodItems %}
+
+            <div class="col-md-4 mb-4">
+
+                <div class="card shadow h-100">
+
+                    {% if food.img %}
+
+                        <img
+                            src="{{ food.img.url }}"
+                            class="card-img-top"
+                            style="height:200px; object-fit:cover;"
+                        >
+
+                    {% endif %}
+
+                    <div class="card-body">
+
+                        <h4 class="card-title">
+                            {{ food.name }}
+                        </h4>
+
+                        <p class="text-muted">
+                            {{ food.category }}
+                        </p>
+
+                        <h5>
+                            ₹{{ food.price }}
+                        </h5>
+
+
+                        <a
+                            href="{% url 'add_to_cart' food.id %}"
+                            class="btn btn-primary"
+                        >
+                            Add to Cart
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="alert alert-info">
+                No food items available.
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

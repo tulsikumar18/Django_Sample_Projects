@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h1 class="text-center mb-5">
+        My Cart
+    </h1>
+
+
+    {% for item in cartItems %}
+
+        <div class="card shadow-sm mb-3">
+
+            <div class="row g-0">
+
+                <div class="col-md-3">
+
+                    {% if item.food_item.img %}
+
+                        <img
+                            src="{{ item.food_item.img.url }}"
+                            class="img-fluid rounded-start"
+                            style="height:180px; width:100%; object-fit:cover;"
+                        >
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="col-md-9">
+
+                    <div class="card-body">
+
+                        <h4>
+                            {{ item.food_item.name }}
+                        </h4>
+
+                        <p class="text-muted">
+                            {{ item.food_item.category }}
+                        </p>
+
+                        <p>
+                            Restaurant:
+                            <strong>
+                                {{ item.food_item.vendor.restaurant_name }}
+                            </strong>
+                        </p>
+
+                        <h5>
+                            ₹{{ item.food_item.price }}
+                        </h5>
+
+                        <p>
+                            Quantity:
+                            <strong>
+                                {{ item.quantity }}
+                            </strong>
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+<br>
+
+    {% empty %}
+
+        <div class="alert alert-info text-center">
+
+            Your cart is empty.
+
+        </div>
+
+    {% endfor %}
+
+<input type="submit" value="CHECKOUT" class="btn btn-primary">
+
+
+</div>
+
+                   
+
+
+{% endblock %}

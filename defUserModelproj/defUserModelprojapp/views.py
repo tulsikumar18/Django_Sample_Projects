@@ -1,12 +1,15 @@
 
+from menuapp.models import FoodItems
 from defUserModelprojapp.models import VendorDetails
+
+from cart.models import CartItems
 
 from menuapp.forms import MenuForms
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout 
 from django.contrib.auth.models import User
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from defUserModelprojapp.forms import UserForm, UserProfileForm , UserUpdateForm , UserProfileUpdateForm
 from defUserModelprojapp.forms import VendorDetailsForm
 
@@ -99,10 +102,27 @@ def home(request):
     return render(request, 'home.html', {'vendors': vendors})  # it returns the data in the form of QuerySet..
 
 
+
 @login_required(login_url='login')
 def user_profile(request):
-    
-    return render(request, 'profile.html',{})
+
+    user = request.user
+
+    # if it is vendor then give this details..
+
+    if hasattr(user, 'vendor'):
+        vendor = user.vendor
+
+        return render(request, 'profile.html', {'user': user, 'vendor': vendor, 'is_vendor': True})
+
+    else:
+        # if it is normal user then ,give this details....
+
+        userdetails = request.user.userdetails
+        return render(request, 'profile.html',{'user' : user, 'userdetails':userdetails, 'is_vendor': False})
+
+
+
 
 @login_required(login_url= 'login')
 def user_logout(request):
@@ -111,11 +131,13 @@ def user_logout(request):
 
     return redirect('login')
 
+
+
+
 @login_required(login_url = 'login')
 def update(request):
 
-    form1 = UserUpdateForm(instance=request.user)
-    form2 = UserProfileUpdateForm(instance=request.user.userdetails)
+
 
     if request.method == 'POST':
 
@@ -129,8 +151,11 @@ def update(request):
             profile.user = user
             profile.save()
             return redirect('profile')
-    return render(request, 'update.html',{'form1': form1 , 'form2' : form2})
 
+    else:
+            form1 = UserUpdateForm(instance=request.user)
+            form2 = UserProfileUpdateForm(instance=request.user.userdetails)
+    return render(request, 'update.html',{'form1': form1 , 'form2' : form2})
 
 
 
@@ -176,8 +201,13 @@ def vendor_reg(request):
 def dashboard(request):
 
     vendor = request.user.vendor   ## it is used to access the details of the logged in Vendor...
+
+    foodItems = FoodItems.objects.filter(
+        is_available = True,  # it will return the query set of the foodItems avalaible..
+        vendor = vendor
+        ) 
     
-    return render(request, 'dashboard.html' , {'vendor': vendor})
+    return render(request, 'dashboard.html' , {'vendor': vendor , 'foodItems': foodItems})
 
 
 
@@ -187,6 +217,82 @@ def dashboard(request):
 @login_required(login_url = 'login')
 def foodmenu(request):
 
-    form1 = MenuForms()
+    vendor = request.user.vendor
 
-    return render(request, 'foodmenu.html', {'form1': form1})
+
+    if request.method == 'POST':
+        form1 = MenuForms(request.POST, request.FILES )
+
+        if form1.is_valid():
+
+            food = form1.save(commit=False)
+            food.vendor = vendor          # Automatically assign logged-in vendor
+            food.save()
+            return redirect('dashboard')
+    else:
+        form1 = MenuForms()
+
+    return render(request, 'foodmenu.html', {'form1': form1, 'vendor' : vendor})
+
+
+
+
+
+# views for the restuarant details..
+@login_required(login_url='login')
+def res_details(request, id):
+
+    vendor = get_object_or_404(
+        VendorDetails,
+        id=id,
+        is_approved=True
+    )
+
+    foodItems = FoodItems.objects.filter(
+        vendor=vendor,
+        is_available=True
+    )
+
+    return render(request,'res_details.html', {'vendor': vendor,'foodItems': foodItems})
+
+
+
+# create a cart..
+
+@login_required(login_url='login')
+def cart(request):
+
+    cartItems = CartItems.objects.filter(
+        user=request.user
+    )
+
+    return render(
+        request,
+        'cart.html',
+        {
+            'cartItems': cartItems
+        }
+    )
+
+
+# add items to the cart..
+
+@login_required(login_url='login')
+def add_to_cart(request, id):
+
+    food = get_object_or_404(
+        FoodItems,
+        id=id,
+        is_available=True
+    )
+
+    cart_item, created = CartItems.objects.get_or_create(
+        user=request.user,
+        food_item=food
+    )
+
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+
+    return redirect('cart')
