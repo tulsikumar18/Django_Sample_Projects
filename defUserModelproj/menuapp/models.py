@@ -6,10 +6,12 @@ from django.db import models
 
 CATEGORY_CHOICES = [
     ('BREAKFAST', 'breakfast'),
+    ('STARTERS', 'starters'),
     ('LUNCH', 'lunch'),
     ('DINNER', 'dinner'),
     ('BEVERAGES', 'beverages'),
     ('DESSERTS', 'desserts'),
+    
 ]
 
 

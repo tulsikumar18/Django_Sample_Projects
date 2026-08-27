@@ -42,10 +42,254 @@
 
         <hr>
 
-        {% for food in foodItems %}
-            <p>{{food.name}}</p>
-            <img src="{{food.img.url}}" alt="{{food.name}}">
-        {% endfor %}
+        <!-- Bootstrap 5 CSS -->
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+>
+
+<style>
+    /* ==============================
+       FOOD SECTION
+    ============================== */
+
+    .food-section {
+        padding: 50px 15px;
+    }
+
+    .food-title {
+        font-weight: 700;
+        font-size: clamp(1.8rem, 4vw, 2.7rem);
+        color: #212529;
+        margin-bottom: 40px;
+    }
+
+
+    /* ==============================
+       FOOD CARD
+    ============================== */
+
+    .food-card {
+        border: none;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #fff;
+
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+
+        height: 100%;
+    }
+
+    .food-card:hover {
+        transform: translateY(-8px);
+
+        box-shadow:
+            0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+
+    /* ==============================
+       IMAGE
+    ============================== */
+
+    .food-image-wrapper {
+        width: 100%;
+        height: 230px;
+
+        overflow: hidden;
+
+        background: #f8f9fa;
+    }
+
+    .food-image {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+        object-position: center;
+
+        display: block;
+
+        transition: transform 0.5s ease;
+    }
+
+    .food-card:hover .food-image {
+        transform: scale(1.07);
+    }
+
+
+    /* ==============================
+       CARD BODY
+    ============================== */
+
+    .food-card-body {
+        padding: 20px;
+
+        display: flex;
+        flex-direction: column;
+
+        height: calc(100% - 230px);
+    }
+
+    .food-name {
+        font-size: 1.15rem;
+        font-weight: 600;
+
+        color: #212529;
+
+        margin-bottom: 15px;
+
+        /* Keep card heights consistent */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+
+        overflow: hidden;
+    }
+
+
+    /* ==============================
+       BUTTON
+    ============================== */
+
+    .food-btn {
+        margin-top: auto;
+
+        border-radius: 10px;
+
+        font-weight: 600;
+
+        padding: 10px 15px;
+
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .food-btn:hover {
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+
+
+    /* ==============================
+       MOBILE
+    ============================== */
+
+    @media (max-width: 576px) {
+
+        .food-section {
+            padding: 30px 12px;
+        }
+
+        .food-title {
+            margin-bottom: 25px;
+        }
+
+        .food-image-wrapper {
+            height: 240px;
+        }
+
+        .food-card-body {
+            height: auto;
+        }
+    }
+
+
+    /* ==============================
+       TABLET
+    ============================== */
+
+    @media (min-width: 577px) and (max-width: 991px) {
+
+        .food-image-wrapper {
+            height: 210px;
+        }
+
+        .food-card-body {
+            height: auto;
+        }
+    }
+</style>
+
+
+        <!-- ==============================
+            FOOD SECTION
+        ================================ -->
+
+        <div class="container food-section">
+
+            <h1 class="food-title text-center">
+                Food Available
+            </h1>
+
+
+            <!-- Responsive Bootstrap Grid -->
+
+            <div class="row g-4">
+
+                {% for food in foodItems %}
+
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+
+                    <div class="card food-card">
+
+                        <!-- Image -->
+
+                        <div class="food-image-wrapper">
+
+                            <img
+                                src="{{ food.img.url }}"
+                                alt="{{ food.name }}"
+                                class="food-image"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+
+                        <!-- Card Content -->
+
+                        <div class="food-card-body">
+
+                            <h5 class="food-name">
+                                {{ food.name }}
+                            </h5>
+
+                            <a
+                                href="{% url 'food_details' food.id %}"
+                                class="btn btn-primary food-btn"
+                            >
+                                View Food
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% empty %}
+
+                <div class="col-12">
+
+                    <div class="alert alert-info text-center">
+                        No food items available.
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
 
     </div>
 </div>

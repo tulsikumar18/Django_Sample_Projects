@@ -2,24 +2,245 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="jumbotron">
-        <h2>
-            Update Profile
-        </h2>
-        <p>Use this form to update your profile.
-        </p>
+<style>
+
+    /* Main background */
+    body {
+        background: linear-gradient(135deg, #eef2ff, #f8f9fa);
+    }
+
+    /* Main wrapper */
+    .update-wrapper {
+        min-height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 15px;
+    }
+
+    /* Update card */
+    .update-card {
+        width: 100%;
+        max-width: 850px;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        border: none;
+    }
+
+    /* Header */
+    .update-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .update-header h2 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #212529;
+        margin-bottom: 8px;
+    }
+
+    .update-header p {
+        color: #6c757d;
+        font-size: 15px;
+    }
+
+    /* Section headings */
+    .form-section {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #eeeeee;
+    }
+
+    .form-section h5 {
+        color: #0d6efd;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    /* Django form labels */
+    form label {
+        font-weight: 600;
+        color: #343a40;
+        margin-bottom: 7px;
+    }
+
+    /* Django form inputs */
+    form input,
+    form select,
+    form textarea {
+        width: 100%;
+        padding: 11px 14px;
+        border: 1px solid #ced4da;
+        border-radius: 10px;
+        outline: none;
+        transition: all 0.25s ease;
+        font-size: 15px;
+    }
+
+    /* Input focus */
+    form input:focus,
+    form select:focus,
+    form textarea:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.12);
+    }
+
+    /* Error messages */
+    .errorlist {
+        color: #dc3545;
+        font-size: 13px;
+        padding-left: 0;
+        list-style: none;
+        margin-top: 5px;
+    }
+
+    /* Help text */
+    .helptext {
+        color: #6c757d;
+        font-size: 12px;
+    }
+
+    /* Form paragraphs */
+    form p {
+        margin-bottom: 20px;
+    }
+
+    /* Update button */
+    .update-btn {
+        width: 100%;
+        padding: 13px;
+        margin-top: 15px;
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #0d6efd, #084298);
+        color: white;
+        font-size: 17px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .update-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(13, 110, 253, 0.3);
+    }
+
+    /* Cancel button */
+    .cancel-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #6c757d;
+        color: #495057;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .cancel-btn:hover {
+        background: #f1f3f5;
+        color: #212529;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+
+        .update-card {
+            padding: 25px 20px;
+        }
+
+        .update-header h2 {
+            font-size: 26px;
+        }
+
+    }
+
+</style>
+
+
+<div class="update-wrapper">
+
+    <div class="update-card">
+
+
+        <!-- Header -->
+
+        <div class="update-header">
+
+            <div style="font-size: 45px;">
+                👤
+            </div>
+
+            <h2>
+                Update Profile
+            </h2>
+
+            <p>
+                Update your personal information and profile details
+            </p>
+
+        </div>
+
 
         <form action="" method="POST" enctype="multipart/form-data">
+
             {% csrf_token %}
 
+
+            <!-- Account Information -->
+
+            <div class="form-section">
+
+                <h5>
+                    Account Information
+                </h5>
+
+            </div>
+
             {{ form1.as_p }}
+
+
+            <!-- Personal Information -->
+
+            <div class="form-section">
+
+                <h5>
+                    Personal Information
+                </h5>
+
+            </div>
+
             {{ form2.as_p }}
-            <input type="submit" class="btn btn-primary"  value="UPDATE">
+
+
+            <!-- Buttons -->
+
+            <button
+                type="submit"
+                class="update-btn"
+            >
+                ✓ Update Profile
+            </button>
+
+
+            <a
+                href="{% url 'profile' %}"
+                class="cancel-btn"
+            >
+                ← Back to Profile
+            </a>
 
         </form>
-    </div>
-</div>
 
+
+    </div>
+
+</div>
 
 {% endblock %}

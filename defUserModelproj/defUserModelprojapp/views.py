@@ -3,7 +3,7 @@ from menuapp.models import FoodItems
 from defUserModelprojapp.models import VendorDetails
 
 from cart.models import CartItems
-
+import numpy as np
 from menuapp.forms import MenuForms
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -262,23 +262,45 @@ def res_details(request, id):
 @login_required(login_url='login')
 def cart(request):
 
+    if hasattr(request.user, 'vendor'):
+        return redirect('dashboard')
+
     cartItems = CartItems.objects.filter(
         user=request.user
     )
+
+    total_price = 0
+
+    for item in cartItems:
+        item.total_price = item.food_item.price * item.quantity
+        total_price += item.total_price
+
+    GST = np.round(total_price * 0.05, 2)
+
+    total_price += GST
 
     return render(
         request,
         'cart.html',
         {
-            'cartItems': cartItems
+            'cartItems': cartItems,
+            'total_price': total_price,
+            'GST': GST,
+            'is_user': True
         }
     )
+
+
+
 
 
 # add items to the cart..
 
 @login_required(login_url='login')
 def add_to_cart(request, id):
+
+    if hasattr(request.user, 'vendor'):
+        return redirect('dashboard')
 
     food = get_object_or_404(
         FoodItems,
@@ -296,3 +318,43 @@ def add_to_cart(request, id):
         cart_item.save()
 
     return redirect('cart')
+
+
+
+## manage the quantity..round
+
+@login_required(login_url='login')
+def inc_dec_quantity(request, id):
+
+    cart_item = get_object_or_404(
+        CartItems,
+        id=id,
+        user=request.user
+    )
+
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
+
+    return redirect('cart')
+
+
+
+
+# food_details
+
+@login_required(login_url = 'login')
+def food_details(request, id):
+
+    
+    food = get_object_or_404(
+        FoodItems,
+        id=id,
+        is_available=True
+    )
+
+    vendor = food.vendor
+
+    return render(request,'food_details.html', {'food': food, 'vendor' : vendor})
