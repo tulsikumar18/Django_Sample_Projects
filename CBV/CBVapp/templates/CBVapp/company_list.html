@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <h1>List of All Company ...</h1>
+
+    {% for company in company_list %}
+
+        <p> 
+            {% if company.logo %}
+                <img src="{{company.logo.url}}" width="100px" height="100px">
+            {% else %}
+                <img src="/media/logo/1756118280329.jpeg" width="100px" height="100px">
+            {% endif %}
+        </p>
+
+        <h1><a href="{{company.id}}">{{company.name}} </a></h1>
+        
+    {% endfor %}
+    
+{% endblock %}

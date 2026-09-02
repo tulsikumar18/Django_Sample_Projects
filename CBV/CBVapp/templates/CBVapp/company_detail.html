@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+    <h1>{{company_detail.name}}'s  Details..</h1>
+
+    <h2>CEO : {{company_detail.ceo }}</h2>
+    <h2> Origin : {{ company_detail.origin }} </h2>
+    <h3> Est : {{ company_detail.est_year }} </h3>
+
+    <a href="/">BACK</a>
+
+    <hr>
+
+    <h1> Products of {{company_detail.name }} </h1>
+    {% for prod in company_detail.companies.all %} 
+
+        {{prod.prod_name}} Price : {{ prod.price }} <br>
+    {% endfor %}
+    
+{% endblock %}

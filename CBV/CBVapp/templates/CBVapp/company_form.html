@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="jumbotron">
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <h1> Add company.</h1>
+            {{form.as_p}}
+
+            <input type="submit" value="ADD" class="btn btn-primary">
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
